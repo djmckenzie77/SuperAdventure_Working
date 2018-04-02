@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperAdenture", "SuperAdenture\SuperAdenture.csproj", "{9F4D107C-4F38-46B9-BA52-CE5C34220B9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{5A1FA289-15B7-42D8-BC1C-4C0DA7298380}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F4D107C-4F38-46B9-BA52-CE5C34220B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4D107C-4F38-46B9-BA52-CE5C34220B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4D107C-4F38-46B9-BA52-CE5C34220B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4D107C-4F38-46B9-BA52-CE5C34220B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A1FA289-15B7-42D8-BC1C-4C0DA7298380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1FA289-15B7-42D8-BC1C-4C0DA7298380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1FA289-15B7-42D8-BC1C-4C0DA7298380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1FA289-15B7-42D8-BC1C-4C0DA7298380}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97313A59-0B44-4AA5-8001-929587E0B555}
+	EndGlobalSection
+EndGlobal
