@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperAdenture", "SuperAdenture\SuperAdenture.csproj", "{9F4D107C-4F38-46B9-BA52-CE5C34220B9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperAdventure", "SuperAdenture\SuperAdventure.csproj", "{9F4D107C-4F38-46B9-BA52-CE5C34220B9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{5A1FA289-15B7-42D8-BC1C-4C0DA7298380}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engine", "Engine\Engine.csproj", "{5A1FA289-15B7-42D8-BC1C-4C0DA7298380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
