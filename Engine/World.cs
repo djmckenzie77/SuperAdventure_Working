@@ -90,6 +90,33 @@ namespace Engine
 
             clearAlchemistGarden.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_RAT_TAIL), 3));
 
+            clearAlchemistGarden.RewardItem = ItemByID(ITEM_ID_HEALING_POTION);
+
+            Quest clearFarmersField = new Quest(QUEST_ID_CLEAR_FARMERS_FIELD,
+                "Clear farmer's field",
+            "Kill snakes in the farmer's field and bring back 3 snake fangs. You will recieve an adventurer's pass and 20 gold pieces.", 20, 20);
+
+            clearFarmersField.QuestCompletionItems.Add(new QuestCompletionItem(ItemsByID(ITEM_ID_SNAKE_FANG), 3));
+
+            clearFarmersField.RewardItem = ItemByID(ITEM_ID_ADVENTURER_PASS);
+
+            Quests.Add(clearAlchemistGarden);
+            Quests.Add(clearFarmersField);
+        }
+
+        private static void PopulateLocations()
+        {
+            //Create each location
+            Location home = new Location(LOCATION_ID_HOME, "Home", "Your house. You really need to clean up the place.");
+
+            Location townSquare = new Location(LOCATION_ID_TOWN_SQUARE, "Town square", "You see a fountain.");
+
+            Location alchemistHut = new Location(LOCATION_ID_ALCHEMIST_HUT, "Alchemist's hut", "There are many strange plants on the shelves.");
+            alchemistHut.QuestAvailableHere = QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
+
+            Location alchemistsGarden = new Location(LOCATION_ID_ALCHEMISTS_GARDEN, "Alchemist's garden", "Many strange plants on the shelves.");
+            alchemistsGarden.MonsterLivingHere = MonsterByID(MONSTER_ID_RAT);
+
 
         }
 
