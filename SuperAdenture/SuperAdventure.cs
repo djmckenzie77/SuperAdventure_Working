@@ -14,20 +14,16 @@ namespace SuperAdenture
     public partial class SuperAdventure : Form
     {
         private Player _player;
+        private Monster _currentMonster;
 
         public SuperAdventure()
         {
             InitializeComponent();
 
-            Location location = new Location(1, "Home", "This is your house.");
-          
 
-            _player = new Player();
-            _player.CurrentHitPoints = 10;
-            _player.MaximumHitPoints = 10;
-            _player.Gold = 20;
-            _player.ExperiencePoints = 20;
-            _player.Level = 1;
+            _player = new Player(10, 10, 20, 0, 1);
+            MoveTo(world.LocationByID(World.LOCATION_ID_HOME));
+            _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
 
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             lblGold.Text = _player.Gold.ToString();
@@ -35,31 +31,52 @@ namespace SuperAdenture
             lblLevel.Text = _player.Level.ToString();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnNorth_Click(object sender, EventArgs e)
         {
-
+            MoveTo(_player.CurrentLocation.LocationToNorth);
         }
 
         private void btnWest_Click(object sender, EventArgs e)
         {
-
+            MoveTo(_player.CurrentLocation.LocationToWest);
         }
 
         private void btnSouth_Click(object sender, EventArgs e)
         {
-
+            MoveTo(_player.CurrentLocation.LocationToSouth);
         }
 
         private void btnEast_Click(object sender, EventArgs e)
         {
-
+            MoveTo(_player.CurrentLocation.LocationToEast);
         }
 
+        private void MoveTo(Location newLocation)
+        {
+            //Does the location have any required items
+            if (newLocation.ItemRequiredToEnter != null)
+            {
+                //See if the player has the required items in their inventory
+                bool playerHasRequiredItem = false;
+
+                foreach (InventoryItem ii in _player.Inventory)
+                {
+                    if (ii.Details.ID == newLocation.ItemRequiredToEnter.ID)
+                    {
+                        //We found the required item
+                        playerHasRequiredItem = true;
+                        break; //Exit out of the foreach loop
+                    }
+                }
+
+                if (!playerHasRequiredItem)
+                {
+                    //We didn't find the required item in the inventory
+                    rtbMessages.Text += "You must have a " + newLocation.ItemRequiredToEnter.Name + " to enter this location." + Environment.NewLine;
+                    return;
+                }
+            }
+        }
         private void btnUseWeapon_Click(object sender, EventArgs e)
         {
 
