@@ -84,7 +84,7 @@ namespace Engine
 
         private static void PopulateQuests()
         {
-            Quest ClearAlchemistGarden = new Quest(QUEST_ID_CLEAR_ALCHEMIST_GARDEN, "Clear the alchemist's garden",
+            Quest clearAlchemistGarden = new Quest(QUEST_ID_CLEAR_ALCHEMIST_GARDEN, "Clear the alchemist's garden",
                 "Kill rats in the alchemist's garden and bring back 3 rat tails." +
                 " You will receive a healing potion and 10 gold pieces.", 20, 10);
 
@@ -116,6 +116,116 @@ namespace Engine
 
             Location alchemistsGarden = new Location(LOCATION_ID_ALCHEMISTS_GARDEN, "Alchemist's garden", "Many strange plants on the shelves.");
             alchemistsGarden.MonsterLivingHere = MonsterByID(MONSTER_ID_RAT);
+
+            Location farmhouse = new Location(LOCATION_ID_FARMHOUSE, "Farmhouse", "There is a small farmhouse, with a farmer in front.");
+            farmhouse.QuestAvailableHere = QuestByID(QUEST_ID_CLEAR_FARMERS_FIELD);
+
+            Location farmersField = new Location(LOCATION_ID_FARM_FIELD, "Farmer's field", "You see rows of vegetables growing here.");
+            farmersField.MonsterLivingHere = MonsterByID(MONSTER_ID_SNAKE);
+
+            Location guardPost = new Location(LOCATION_ID_GUARD_POST, "Guard post", "There is a large, tough-looking guard here.", ItemByID(ITEM_ID_ADVENTURER_PASS));
+
+            Location bridge = new Location(LOCATION_ID_BRIDGE, "Bridge", "A stone bridge crosses a wide river.");
+
+            Location spiderField = new Location(LOCATION_ID_SPIDER_FIELD, "Forest", "You see spider webs covering the trees in this forest.");
+            spiderField.MonsterLivingHere = MonsterByID(MONSTER_ID_GIANT_SPIDER);
+
+            //Link the locations together
+            home.LocationToNorth = townSquare;
+
+            townSquare.LocationToNorth = alchemistHut;
+            townSquare.LocationToSouth = home;
+            townSquare.LocationToEast = guardPost;
+            townSquare.LocationToWest = farmhouse;
+
+            farmhouse.LocationToEast = townSquare;
+            farmhouse.LocationToWest = farmersField;
+
+            farmersField.LocationToEast = farmhouse;
+
+            alchemistHut.LocationToSouth = townSquare;
+            alchemistHut.LocationToNorth = alchemistsGarden;
+
+            alchemistsGarden.LocationToSouth = alchemistHut;
+
+            guardPost.LocationToEast = bridge;
+            guardPost.LocationToWest = townSquare;
+
+            bridge.LocationToWest = guardPost;
+            bridge.LocationToEast = spiderField;
+
+            spiderField.LocationToWest = bridge;
+
+            // Add the locations to the 
+            Locations.Add(home);
+            Locations.Add(townSquare);
+            Locations.Add(guardPost);
+            Locations.Add(alchemistHut);
+            Locations.Add(alchemistsGarden);
+            Locations.Add(farmhouse);
+            Locations.Add(farmersField);
+            Locations.Add(bridge);
+            Locations.Add(spiderField);
+        }
+
+            public static Item ItemByID(int id)
+            {
+                foreach (Item item in Items)
+                {
+                    if (item.ID == id)
+                    {
+                        return item;
+                    }
+                }
+                return null;
+            }
+
+            public static Monster MonsterByID(int id)
+            {
+                foreach (Monster monster in Monsters)
+                {
+                    if (monster.ID == id)
+                    {
+                        return monster;
+                    }
+                }
+                return null;
+            }
+
+            public static Quest QuestByID(int id)
+            {
+                foreach (Quest quest in Quests)
+                {
+                    if (quest.ID == id)
+                    {
+                        return quest;
+                    }
+                }
+                return null;
+            }
+
+            public static Location LocationByID(int id)
+            {
+                foreach (Location location in Locations)
+                {
+                    if (location.ID == id)
+                    {
+                        return location;
+                    }
+                }
+                return null;
+            }
+
+
+
+
+
+
+
+
+
+
+
 
 
         }
