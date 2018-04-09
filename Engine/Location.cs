@@ -7,8 +7,8 @@ namespace Engine
     public class Location
     {
         public int ID { get; set; }
-        public int Name { get; set; }
-        public int Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public Item ItemRequiredToEnter { get; set; }
         public Quest QuestAvailableHere { get; set; }
         public Monster MonsterLivingHere { get; set; }
@@ -17,7 +17,7 @@ namespace Engine
         public Location LocationToEast { get; set; }
         public Location LocationToWest { get; set; }
 
-        public Location(int ID, string name, string description, Item itemRequiredToEnter = null, Monster monsterLivingHere = null, Quest questAvailableHere = null)
+        public Location(int id, string name, string description, Item itemRequiredToEnter = null, Monster monsterLivingHere = null, Quest questAvailableHere = null)
         {
             ID = id;
             Name = name;
