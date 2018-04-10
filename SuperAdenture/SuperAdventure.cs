@@ -22,7 +22,7 @@ namespace SuperAdenture
 
 
             _player = new Player(10, 10, 20, 0, 1);
-            MoveTo(world.LocationByID(World.LOCATION_ID_HOME));
+            MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
             _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
 
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
@@ -184,6 +184,34 @@ namespace SuperAdenture
                         //Give quest rewards
                         rtbMessages.Text += "You receive: " + Environment.NewLine;
                         rtbMessages.Text += newLocation.QuestAvailableHere.RewardExperiencePoints.ToString() + " experience points" + Environment.NewLine;
+                        rtbMessages.Text += newLocation.QuestAvailableHere.RewardGold.ToString() + " gold" + Environment.NewLine;
+                        rtbMessages.Text += newLocation.QuestAvailableHere.RewardItem.Name + Environment.NewLine;
+                        rtbMessages.Text += Environment.NewLine;
+
+                        _player.ExperiencePoints += newLocation.QuestAvailableHere.RewardExperiencePoints;
+                        _player.Gold += newLocation.QuestAvailableHere.RewardGold;
+
+                        //Add the rewared item to the player's inventory
+                        bool addedItemToPlayerInventory = false;
+
+                        foreach(InventoryItem ii in _player.Inventory)
+                        {
+                            if(ii.Details.ID == newLocation.QuestAvailableHere.RewardItem.ID)
+                            {
+                                //They have the item in their inventory, so increase quantity by one
+                                ii.Quantity++;
+
+                                addedItemToPlayerInventory = true;
+
+                                break;
+                            }
+                        }
+
+                        //They didn't have the item, so add it to their inventory
+                        if(!addedItemToPlayerInventory)
+                        {
+                            _player.Inventory.Add(new InventoryItem(newLocation.QuestAvailableHere.RewardItem, 1));
+                        }
 
                     }
                 }
