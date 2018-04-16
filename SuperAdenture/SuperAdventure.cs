@@ -213,6 +213,33 @@ namespace SuperAdenture
                             _player.Inventory.Add(new InventoryItem(newLocation.QuestAvailableHere.RewardItem, 1));
                         }
 
+                        //Mark the quest as completed
+                        // Find the quest in the player's quest list
+                        foreach(PlayerQuest pq in _player.Quests)
+                        {
+                            if(pq.Details.ID == newLocation.QuestAvailableHere.ID)
+                            {
+                                // Mark it as completed
+                                pq.IsCompleted = true;
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //The player does not already have the quest
+                //Display the message
+                rtbMessages.Text += "You receive the " + newLocation.QuestAvailableHere.Name + " quest." + Environment.NewLine;
+                rtbMessages.Text += newLocation.QuestAvailableHere.Description + Environment.NewLine;
+                rtbMessages.Text += "To complete it, return with:" + Environment.NewLine;
+                foreach(QuestCompletionItem qci in newLocation.QuestAvailableHere.QuestCompletionItems)
+                {
+                    if(qci.Quantity == 1)
+                    {
+                        rtbMessages.Text += qci.Quantity.ToString() + " " + qci.Details.Name + Environment.NewLine;
                     }
                 }
             }
