@@ -235,15 +235,57 @@ namespace SuperAdenture
                 rtbMessages.Text += "You receive the " + newLocation.QuestAvailableHere.Name + " quest." + Environment.NewLine;
                 rtbMessages.Text += newLocation.QuestAvailableHere.Description + Environment.NewLine;
                 rtbMessages.Text += "To complete it, return with:" + Environment.NewLine;
-                foreach(QuestCompletionItem qci in newLocation.QuestAvailableHere.QuestCompletionItems)
+                foreach (QuestCompletionItem qci in newLocation.QuestAvailableHere.QuestCompletionItems)
                 {
-                    if(qci.Quantity == 1)
+                    if (qci.Quantity == 1)
                     {
                         rtbMessages.Text += qci.Quantity.ToString() + " " + qci.Details.Name + Environment.NewLine;
                     }
+                    else
+                    {
+                        rtbMessages.Text += qci.Quantity.ToString() + " " + qci.Details.NamePlural + Environment.NewLine;
+                    }
                 }
+                rtbMessages.Text += Environment.NewLine;
+
+                // Add the quest to the player's quest list
+                _player.Quests.Add(new PlayerQuest(newLocation.QuestAvailableHere));
             }
+            // Does the location have a monster?
+            if(newLocation.MonsterLivingHere != null)
+            {
+                rtbMessages.Text += "You see a " + newLocation.MonsterLivingHere.Name + Environment.NewLine;
+
+                // Make a new monster, using the values from the standard monster in the World.Monster list
+                Monster standardMonster = World.MonsterByID(newLocation.MonsterLivingHere.ID);
+
+                _currentMonster = new Monster(standardMonster.ID, standardMonster.Name, standardMonster.MaximumDamage, standardMonster.RewardExperiencePoints, standardMonster.MaximumHitPoints);
+
+                foreach(LootItem lootItem in standardMonster.LootTable)
+                {
+                    _currentMonster.LootTable.Add(lootItem);
+                }
+
+                cboWeapons.Visible = true;
+                cboPotions.Visible = true;
+                btnUseWeapon.Visible = false;
+                btnUsePotion.Visible = false;
+            }
+            else
+            {
+                _currentMonster = null;
+
+                cboPotions.Visible = false;
+                cboWeapons.Visible = false;
+                btnUseWeapon.Visible = false;
+                btnUsePotion.Visible = false;
+            }
+
+            //Refresh player's inventory list
+            dgvInventory.RowHeadersVisible = false;
+            dgvInventory.ColumnCount = 2;
         }
+        
         private void btnUseWeapon_Click(object sender, EventArgs e)
         {
 
